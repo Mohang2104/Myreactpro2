@@ -1,122 +1,77 @@
 /* global React, ReactDOM */
-const blogData = [
-  {
-    id: 1,
-    title: "What is React?",
-    date: "2025-06-15",
-    content:
-      "React is a JavaScript library for building user interfaces developed by Facebook. It helps create interactive UIs with reusable components.",
-  },
-  {
-    id: 2,
-    title: "JavaScript Basics for Beginners",
-    date: "2025-06-14",
-    content:
-      "JavaScript is a programming language used to create dynamic content on websites, such as interactive forms, sliders, and more.",
-  },
-  {
-    id: 3,
-    title: "Why You Should Learn CSS Grid",
-    date: "2025-06-13",
-    content:
-      "CSS Grid allows developers to build flexible and responsive web layouts. It's essential for modern frontend design.",
-  },
-  {
-    id: 4,
-    title: "Understanding REST APIs",
-    date: "2025-06-12",
-    content:
-      "REST APIs help in data communication between frontend and backend. They are used in almost all web and mobile applications today.",
-  },
-];
 
+/* --------- Main component --------- */
 function App() {
-  const [search, setSearch] = React.useState("");
-  const [activePage, setActivePage] = React.useState("home");
-  const [darkMode, setDarkMode] = React.useState(false);
+  const [task, setTask]           = React.useState('');
+  const [todos, setTodos]         = React.useState([]);
+  const [currentTime, setNow]     = React.useState(new Date());
 
-  const filteredBlogs = blogData.filter((blog) =>
-    blog.title.toLowerCase().includes(search.toLowerCase())
-  );
+  /* Clock ticker */
+  React.useEffect(() => {
+    const timer = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
-  const formatDate = (date) =>
-    new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+  /* Add a new task */
+  const addTask = () => {
+    if (task.trim() === '') return;
+
+    const newTask = {
+      id:   Date.now(),
+      text: task,
+      date: currentTime.toLocaleDateString(),
+      time: currentTime.toLocaleTimeString(),
+    };
+
+    setTodos([newTask, ...todos]);
+    setTask('');
+  };
+
+  /* Delete a task */
+  const deleteTask = (id) => setTodos(todos.filter((t) => t.id !== id));
 
   return (
-    <div className={darkMode ? "app dark" : "app"}>
-      {/* Navbar */}
-      <nav className="navbar">
-        <div className="logo">📰 My Blog</div>
-        <ul className="nav-links">
-          <li>
-            <button onClick={() => setActivePage("home")}>Home</button>
-          </li>
-          <li>
-            <button onClick={() => setActivePage("about")}>About</button>
-          </li>
-          <li>
-            <button onClick={() => setActivePage("contact")}>Contact</button>
-          </li>
-        </ul>
-        <button className="toggle-mode" onClick={() => setDarkMode(!darkMode)}>
-          {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-        </button>
-      </nav>
+    <div className="app">
+      <h1>📝 Day-To-Day Planning Project</h1>
 
-      {/* Home */}
-      {activePage === "home" && (
-        <>
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search blog titles..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <div className="blog-container">
-            {filteredBlogs.length ? (
-              filteredBlogs.map((blog) => (
-                <div className="blog-card" key={blog.id}>
-                  <h2>{blog.title}</h2>
-                  <p className="date">📅 {formatDate(blog.date)}</p>
-                  <p>{blog.content.substring(0, 100)}...</p>
-                  <a href="#">Read More</a>
-                </div>
-              ))
-            ) : (
-              <p className="no-results">No blogs found.</p>
-            )}
-          </div>
-        </>
-      )}
+      <p className="intro">
+        You should complete all the work today. ALL THE BEST BUDDY! <br />
+        <strong>Today:</strong> {currentTime.toLocaleDateString()} |{' '}
+        <strong>Time:</strong> {currentTime.toLocaleTimeString()}
+      </p>
 
-      {/* About */}
-      {activePage === "about" && (
-        <div className="page-content">
-          <h2>About Us</h2>
-          <p>
-            We share knowledge about frontend development, especially React,
-            CSS, and JavaScript.
-          </p>
-        </div>
-      )}
+      {/* Input */}
+      <div className="input-area">
+        <input
+          type="text"
+          placeholder="Type your task..."
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && addTask()}
+        />
+        <button onClick={addTask}>➕ Add</button>
+      </div>
 
-      {/* Contact */}
-      {activePage === "contact" && (
-        <div className="page-content">
-          <h2>Contact Us</h2>
-          <p>Email: contact@myblog.com</p>
-          <p>Phone: +91-9876543210</p>
-        </div>
-      )}
+      {/* Todo list */}
+      <ul className="todo-list">
+        {todos.map((todo) => (
+          <li key={todo.id} className="todo-item">
+            <div>
+              <h3>{todo.text}</h3>
+              <p>🗓 {todo.date} &nbsp; ⏰ {todo.time}</p>
+            </div>
+            <button className="del-btn" onClick={() => deleteTask(todo.id)}>🗑</button>
+          </li>
+        ))}
+
+        {todos.length === 0 && (
+          <p className="empty">No tasks yet. Add one above!</p>
+        )}
+      </ul>
     </div>
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+/* --------- Mount to the page --------- */
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
