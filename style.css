@@ -1,135 +1,111 @@
-/* App.css (converted to valid CSS comments) */
+
 body {
   margin: 0;
-  padding: 0;
   font-family: 'Segoe UI', sans-serif;
-}
-
-.app {
-  background-color: #f4f4f4;
-  color: #000;
+  background: linear-gradient(120deg, #89f7fe, #66a6ff);
   min-height: 100vh;
-  transition: all 0.3s ease;
 }
 
-.app.dark {
-  background-color: #121212;
-  color: #ffffff;
-}
-
-/* ---------------- Navbar ---------------- */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #007bff;
-  color: white;
-  padding: 15px 25px;
-  flex-wrap: wrap;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 15px;
-  padding: 0;
-}
-
-.nav-links li button {
-  background: transparent;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.toggle-mode {
-  background-color: white;
-  color: #007bff;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* ---------------- Search ---------------- */
-.search-bar {
-  margin: 20px auto;
+/* ---------- Layout ---------- */
+.app {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px 20px;
   text-align: center;
 }
 
-.search-bar input {
-  width: 80%;
-  max-width: 400px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #aaa;
-  border-radius: 6px;
-}
-
-/* ---------------- Blog cards ---------------- */
-.blog-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px;
-  gap: 20px;
-}
-
-.blog-card {
-  background-color: #fff;
-  padding: 20px;
-  width: 280px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: 0.3s ease;
-  text-align: left;
-}
-
-.app.dark .blog-card {
-  background-color: #1e1e1e;
-  color: #fff;
-}
-
-.blog-card h2 {
-  margin-top: 0;
-  color: #007bff;
-}
-
-.blog-card .date {
-  font-size: 12px;
-  color: gray;
+/* ---------- Headings & intro ---------- */
+h1 {
+  color: #222;
   margin-bottom: 10px;
 }
 
-.blog-card a {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
+.intro {
+  color: #333;
+  font-size: 15px;
+  margin-bottom: 30px;
+  background: #ffffffaa;
+  padding: 10px;
+  border-radius: 10px;
 }
 
-.blog-card a:hover {
-  text-decoration: underline;
+/* ---------- Input area ---------- */
+.input-area {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
 }
 
-/* ---------------- Generic sections ---------------- */
-.page-content {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  text-align: center;
+input {
+  padding: 10px;
+  width: 65%;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  outline: none;
+  font-size: 16px;
 }
 
-.no-results {
-  color: red;
-  font-weight: bold;
-  text-align: center;
+button {
+  padding: 0 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+/* ---------- Todo list ---------- */
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-item {
+  background-color: white;
+  margin: 10px 0;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.todo-item h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.todo-item p {
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  color: gray;
+}
+
+/* ---------- Buttons ---------- */
+.del-btn {
+  background-color: #dc3545;
+  border: none;
+  padding: 8px 10px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.del-btn:hover {
+  background-color: #c82333;
+}
+
+/* ---------- Empty state ---------- */
+.empty {
+  color: #fff;
+  font-style: italic;
   margin-top: 20px;
   }
