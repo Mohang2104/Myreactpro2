@@ -1,68 +1,75 @@
-//App.js
-import React, { useState } from 'react';
-import './style.css';
-
+/* global React, ReactDOM */
 const blogData = [
   {
     id: 1,
     title: "What is React?",
     date: "2025-06-15",
-    content: "React is a JavaScript library for building user interfaces developed by Facebook. It helps create interactive UIs with reusable components.",
+    content:
+      "React is a JavaScript library for building user interfaces developed by Facebook. It helps create interactive UIs with reusable components.",
   },
   {
     id: 2,
     title: "JavaScript Basics for Beginners",
     date: "2025-06-14",
-    content: "JavaScript is a programming language used to create dynamic content on websites, such as interactive forms, sliders, and more.",
+    content:
+      "JavaScript is a programming language used to create dynamic content on websites, such as interactive forms, sliders, and more.",
   },
   {
     id: 3,
     title: "Why You Should Learn CSS Grid",
     date: "2025-06-13",
-    content: "CSS Grid allows developers to build flexible and responsive web layouts. It's essential for modern frontend design.",
+    content:
+      "CSS Grid allows developers to build flexible and responsive web layouts. It's essential for modern frontend design.",
   },
   {
     id: 4,
     title: "Understanding REST APIs",
     date: "2025-06-12",
-    content: "REST APIs help in data communication between frontend and backend. They are used in almost all web and mobile applications today.",
+    content:
+      "REST APIs help in data communication between frontend and backend. They are used in almost all web and mobile applications today.",
   },
 ];
 
 function App() {
-  const [search, setSearch] = useState('');
-  const [activePage, setActivePage] = useState('home');
-  const [darkMode, setDarkMode] = useState(false);
+  const [search, setSearch] = React.useState("");
+  const [activePage, setActivePage] = React.useState("home");
+  const [darkMode, setDarkMode] = React.useState(false);
 
   const filteredBlogs = blogData.filter((blog) =>
     blog.title.toLowerCase().includes(search.toLowerCase())
   );
 
-  const formatDate = (date) => {
-    const d = new Date(date);
-    return d.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+  const formatDate = (date) =>
+    new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
-  };
 
   return (
-    <div className={darkMode ? 'app dark' : 'app'}>
+    <div className={darkMode ? "app dark" : "app"}>
+      {/* Navbar */}
       <nav className="navbar">
         <div className="logo">📰 My Blog</div>
         <ul className="nav-links">
-          <li><button onClick={() => setActivePage('home')}>Home</button></li>
-          <li><button onClick={() => setActivePage('about')}>About</button></li>
-          <li><button onClick={() => setActivePage('contact')}>Contact</button></li>
+          <li>
+            <button onClick={() => setActivePage("home")}>Home</button>
+          </li>
+          <li>
+            <button onClick={() => setActivePage("about")}>About</button>
+          </li>
+          <li>
+            <button onClick={() => setActivePage("contact")}>Contact</button>
+          </li>
         </ul>
         <button className="toggle-mode" onClick={() => setDarkMode(!darkMode)}>
-          {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+          {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
         </button>
       </nav>
 
-      {activePage === 'home' && (
-        <div className="home">
+      {/* Home */}
+      {activePage === "home" && (
+        <>
           <div className="search-bar">
             <input
               type="text"
@@ -72,7 +79,7 @@ function App() {
             />
           </div>
           <div className="blog-container">
-            {filteredBlogs.length > 0 ? (
+            {filteredBlogs.length ? (
               filteredBlogs.map((blog) => (
                 <div className="blog-card" key={blog.id}>
                   <h2>{blog.title}</h2>
@@ -85,17 +92,22 @@ function App() {
               <p className="no-results">No blogs found.</p>
             )}
           </div>
-        </div>
+        </>
       )}
 
-      {activePage === 'about' && (
+      {/* About */}
+      {activePage === "about" && (
         <div className="page-content">
           <h2>About Us</h2>
-          <p>We share knowledge about frontend development, especially React, CSS, and JavaScript.</p>
+          <p>
+            We share knowledge about frontend development, especially React,
+            CSS, and JavaScript.
+          </p>
         </div>
       )}
 
-      {activePage === 'contact' && (
+      {/* Contact */}
+      {activePage === "contact" && (
         <div className="page-content">
           <h2>Contact Us</h2>
           <p>Email: contact@myblog.com</p>
@@ -106,6 +118,5 @@ function App() {
   );
 }
 
-export default app1;
-
-
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
