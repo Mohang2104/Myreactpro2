@@ -1,6 +1,4 @@
-
-
-//App.css
+/* App.css (converted to valid CSS comments) */
 body {
   margin: 0;
   padding: 0;
@@ -19,6 +17,7 @@ body {
   color: #ffffff;
 }
 
+/* ---------------- Navbar ---------------- */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -60,6 +59,7 @@ body {
   font-weight: bold;
 }
 
+/* ---------------- Search ---------------- */
 .search-bar {
   margin: 20px auto;
   text-align: center;
@@ -74,6 +74,7 @@ body {
   border-radius: 6px;
 }
 
+/* ---------------- Blog cards ---------------- */
 .blog-container {
   display: flex;
   flex-wrap: wrap;
@@ -118,6 +119,7 @@ body {
   text-decoration: underline;
 }
 
+/* ---------------- Generic sections ---------------- */
 .page-content {
   max-width: 800px;
   margin: 40px auto;
@@ -130,4 +132,4 @@ body {
   font-weight: bold;
   text-align: center;
   margin-top: 20px;
-}
+  }
